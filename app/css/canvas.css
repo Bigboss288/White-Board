@@ -1,0 +1,16 @@
+.container{
+    height: 95vh;
+    width: 100vw;
+    max-height: 95vh;
+}
+
+.container>:nth-child(2){
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container>canvas{
+    /* height: 100%; */
+    /* width: 100%; */
+    /* position: relative; */
+}

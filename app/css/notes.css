@@ -1,0 +1,33 @@
+.notes-container{
+    height: 10rem;
+    width: 9rem;
+    font-size: 0.8rem;
+    font-family: cursive;
+    background: antiquewhite;
+    border-radius: 5px;
+    padding: 0.2rem;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    cursor: move;
+}
+
+.notes-container>button{
+    position: absolute;
+    top: 0.4rem;
+    left: 8.3rem;
+    display: flex;
+    border: none;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.notes-container>button:hover{
+    background-color: lightgray;
+    transform: scale(1.2);
+}
+
+.notes-container>button>img{
+    height: 0.9rem;
+}
