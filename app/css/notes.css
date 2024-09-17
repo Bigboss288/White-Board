@@ -1,33 +1,70 @@
-.notes-container{
-    height: 10rem;
-    width: 9rem;
-    font-size: 0.8rem;
-    font-family: cursive;
-    background: antiquewhite;
-    border-radius: 5px;
-    padding: 0.2rem;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+.notes-container {
     position: absolute;
-    cursor: move;
-}
-
-.notes-container>button{
-    position: absolute;
-    top: 0.4rem;
-    left: 8.3rem;
+    width: 19rem; /* Adjust width as needed */
+    height: 20rem; /* Adjust height as needed */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: grab;
     display: flex;
+    flex-direction: column;
+    user-select: none; /* Prevent text selection during drag */
+    font-family: Arial, sans-serif;
+  }
+  
+  .notes-container > div:first-child {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .notes-container button {
+    background: none;
     border: none;
-    border-radius: 50%;
-    background-color: white;
     cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.notes-container>button:hover{
-    background-color: lightgray;
-    transform: scale(1.2);
-}
-
-.notes-container>button>img{
-    height: 0.9rem;
-}
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .notes-container img {
+    height: 20px;
+    width: 20px;
+  }
+  
+  .notes-container > div:nth-child(2) {
+    flex: 1;
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    /* Ensure top alignment of content */
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #333;
+    background-color: #fafafa;
+    border-radius: 4px;
+    resize: none; /* Prevent resizing */
+    overflow: auto; /* Enable scrollbars if content overflows */
+    white-space: pre-wrap; /* Preserve whitespace and wrap text */
+    display: block; /* Ensure proper block-level behavior */
+    margin: 0; /* Remove default margin */
+    font-family: cursive;
+  }
+  
+  input[type="text"]::placeholder {
+    color: #aaa;
+  }
+  

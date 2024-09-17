@@ -1,129 +1,111 @@
-.panel-container{
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    background-color: #201E43;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
-    position: fixed;
-    width: -webkit-fill-available;
+.panel-container {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  width: 50%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  z-index: 100;
+  padding: 0 2rem;
 }
 
-.panel-container>:nth-child(1){
-    display: flex;
+.panel-container > div {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
 }
 
-.panel-container>:nth-child(1)>button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0.1rem;
-    cursor: pointer;
-    border: none;
-    width: 1.5rem;
-    border-radius: 5px;
+.panel-container > :nth-child(1){
+    border: 1px solid black;
 }
 
-.panel-container>:nth-child(1)>button>img{
-    height: 1.2rem;
+.panel-container button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.1rem;
+  padding: 0.4rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.panel-container>:nth-child(1)>:nth-child(5){
-    height: 1.1rem;
-    width: 1.1rem;
-    padding: 0.2rem;
-    margin-left: 0.2rem;
-    background-color: #000000;
-    border: 1px solid white;
-    cursor: pointer;
-    position: relative;
+.panel-container button img {
+  height: 1rem;
 }
 
-.color-palette{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.6px;
-    position: absolute;
-    left: 2rem;
-    top: -0.1rem;
-    background-color: white;
-    visibility: hidden;
+.panel-container button:hover {
+  background-color: #c8c8c88e;
+  transform: scale(1.05);
 }
 
-.color-palette>div{
-    height: 1rem;
-    width: 1rem;
-    padding: 0.2rem;
-    margin: 0 0.1rem;
-    border: 1px solid white;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+.note-btn{
+    width: 5rem;
 }
 
-.color-palette>div:hover{
-    border: 1px solid orange;
-    transform: scale(1.02);
+.main-color {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 20%;
+  border: 2px solid #ccc;
+  background-color: black; /* Default color */
+  cursor: pointer;
+  position: relative;
+  margin-left: 0.2rem;
 }
 
-.color-1{
-    background-color: black;
+.color-palette {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.3rem;
+  padding: 0.5rem;
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  z-index: 10;
 }
 
-.color-2{
-    background-color: red;
+.color-palette > div {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 5px; /* Default, change dynamically */
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-.color-3{
-    background-color: rgb(3, 197, 3);
+.color-palette > div:hover {
+  border: 2px solid #c8c8c8;
+  transform: scale(1.1);
 }
 
-
-.panel-container>:nth-child(2)>input{
-    height: 1.7rem;
-    width: 15rem;
-    border-radius: 5px;
-    border: none;
-    padding: 0rem 1rem;
-    outline: none;
+.color-1 {
+  background-color: black;
 }
 
-
-.panel-container>:nth-child(2)>button{
-    margin-left: 0.2rem;
-    height: 1.7rem;
-    width: 3rem;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
+.color-2 {
+  background-color: red;
 }
 
-.button:hover{
-    background-color: #FFB22C;
-    outline: none;
+.color-3 {
+  background-color: rgb(3, 197, 3);
 }
 
-.panel-container>:nth-child(3){
-    display: flex;
-}
-
-.panel-container>:nth-child(3)>:nth-child(2){
-    height: 1.7rem;
-    width: 3rem;
-    border-radius: 5px;
-    margin-left: 0.4rem;
-    border: none;
-    cursor: pointer;
-}
-
-.panel-container>:nth-child(3)>:nth-child(1){
-    display: flex;
-    align-items: center;
-    border: none;
-    width: 1.5rem;
-    border-radius: 5px;
-}
-
-.panel-container>:nth-child(3)>button>img{
-    height: 1.2rem;
+/* Add responsive styles */
+@media (max-width: 768px) {
+  .panel-container {
+    width: 90%;
+  }
 }

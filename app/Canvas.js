@@ -21,26 +21,54 @@ const createElement = (x1, y1, x2, y2, elementType, path, color) => {
   return { x1, y1, x2, y2, roughElement };
 };
 
+// const useHistory = (initialState) => {
+//   const [index, setIndex] = useState(0);
+//   const [history, setHistory] = useState([initialState]);
+
+//   const setState = (action, overwrite = false) => {
+//     const newState = typeof action === 'function' ? action(history[index]) : action;
+//     if (overwrite) {
+//       const historyCopy = [...history];
+//       historyCopy[index] = newState;
+//       setHistory(historyCopy);
+//     } else {
+//       setHistory([...history, newState]);
+//       setIndex(prev => prev + 1);
+//     }
+//   };
+
+//   const undo = () => index > 0 && setIndex(prev => prev - 1)
+
+//   return [history[index], setState, undo];
+// };
+
 const useHistory = (initialState) => {
-  const [index, setIndex] = useState(0);
   const [history, setHistory] = useState([initialState]);
+  const [index, setIndex] = useState(0);
 
   const setState = (action, overwrite = false) => {
     const newState = typeof action === 'function' ? action(history[index]) : action;
+    
     if (overwrite) {
       const historyCopy = [...history];
       historyCopy[index] = newState;
       setHistory(historyCopy);
     } else {
-      setHistory([...history, newState]);
-      setIndex(prev => prev + 1);
+      const updatedHistory = [...history.slice(0, index + 1), newState];
+      setHistory(updatedHistory);
+      setIndex(updatedHistory.length - 1);
     }
   };
 
-  const undo = () => index > 0 && setIndex(prev => prev - 1)
+  const undo = () => {
+    if (index > 0) {
+      setIndex((prev) => prev - 1);
+    }
+  };
 
   return [history[index], setState, undo];
 };
+
 
 
 const Canvas = () => {
@@ -50,8 +78,12 @@ const Canvas = () => {
   const [elementType, setElementType] = useState("");
   const [linearPath, setLinearpath] = useState([]);
   const [notes, setNote] = useState([]);
-  const [notecount, setNoteCount] = useState(0);
+  const [notedata, setNoteData] = useState({});
+  const [isNoteVisble, setNoteVisible] = useState(false)
   const [color, setColor] = useState({ stroke: "black" });
+
+  let height = window.innerHeight
+  let width = window.innerWidth
 
   useLayoutEffect(() => {
     const canvas = document.getElementById("canvas");
@@ -116,23 +148,27 @@ const Canvas = () => {
     };
   }, [drawing, elements, elementType]);
 
-  const addNotes = (text) => {
-    if (notecount >= 10) return;
-    if (text.trim() === "") return;
+  // const addNotes = (text) => {
+  //   if (notecount >= 1) return;
+  //   if (text.trim() === "") return;
 
-    const newNote = {
-      id: notecount,
-      text: text,
-      xPos: Math.floor(Math.random() * 400) + 50,
-      yPos: Math.floor(Math.random() * 200) + 50,
-    };
+  //   const newNote = {
+  //     id: notecount,
+  //     text: text,
+  //     xPos: Math.floor(Math.random() * 400) + 50,
+  //     yPos: Math.floor(Math.random() * 200) + 50,
+  //   };
 
-    console.log(newNote)
+  //   console.log(newNote)
 
-    setNote([...notes, newNote]);
-    setNoteCount((prev) => prev + 1);
+  //   setNote([...notes, newNote]);
+  //   setNoteCount((prev) => prev + 1);
 
-  };
+  // };
+
+  const openNote = () => {
+    setNoteVisible(true)
+  }
 
   const handleDrag = (id, xPos, yPos) => {
     setNote((prevNotes) =>
@@ -149,13 +185,7 @@ const Canvas = () => {
   };
 
   const deleteNote = (id) => {
-    let filter_note = notes.filter(item => {
-      if(item.id !== id) return true;
-    })
-
-    console.log(filter_note)
-    setNote(filter_note)
-    setNoteCount(prev => prev-1)
+   setNoteVisible(false)
   }
 
   const clear_screen = () => {
@@ -170,13 +200,13 @@ const Canvas = () => {
   return (
     <div className="container">
       <Panel
-        addNoteToArray={addNotes}
+        openNoteEditor={openNote}
         set_shape={set_shape}
         setColor={set_color}
         clear={clear_screen} 
         undo_click={undo}
       />
-      <div>
+      {/* <div>
         {notes.map((item, index) => (
           <Notes
             id={item.id}
@@ -188,9 +218,11 @@ const Canvas = () => {
             key={index}
           />
         ))}
-      </div>
+      </div> */}
 
-      <canvas id="canvas" ref={canvasRef} height={480} width={1280}></canvas>
+      {isNoteVisble && <Notes delete_note={deleteNote}/>}
+
+      <canvas id="canvas" ref={canvasRef} height={height} width={width}></canvas>
     </div>
   );
 };
